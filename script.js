@@ -10,7 +10,7 @@ const check = document.querySelector(".check");
 const guess = document.querySelector(".guess");
 const score = document.querySelector(".score");
 const again = document.querySelector(".again");
-
+const highscore = document.querySelector(".highscore");
 const body = document.querySelector("body");
 
 const displayMessage = function (message) {
@@ -25,24 +25,20 @@ again.addEventListener("click", function () {
   randomNumber = Math.trunc(Math.random() * 20) + 1;
 
   displayMessage("Start guessing...");
-  displayScore(totalScore);
+  displayScore(score);
   guess.value = "";
   body.classList.remove("win-background");
-  body.classList.remove("lose-background");
   number.classList.remove("win-number");
   number.textContent = "?";
-  again.classList.add("hidden");
-  check.classList.remove("hidden");
 });
 
 check.addEventListener("click", function () {
   const guessed = Number(guess.value);
-  const highscore = document.querySelector(".highscore");
   if (!guessed) {
-    displayMessage("Please enter a number between 1 and 20");
+    displayMessage("No Number! Please Enter a number between 1 and 20");
 
     // When numbers aren't in the spectrum
-  } else if (guessed > 20 || guessed < 1) {
+  } else if (guessed > 20 || guessed < 0) {
     displayMessage("Please enter a number between 1 and 20");
 
     //When a player wins
@@ -51,11 +47,9 @@ check.addEventListener("click", function () {
     number.textContent = randomNumber;
     body.classList.add("win-background");
     number.classList.add("win-number");
-    again.classList.remove("hidden");
-    check.classList.add("hidden");
     if (highScore < totalScore) {
       highScore = totalScore;
-      highscore.textContent = highScore;
+      highScore.textContent = highScore;
     }
     //When guess is wrong
   } else if (guessed !== randomNumber) {
@@ -66,9 +60,6 @@ check.addEventListener("click", function () {
     } else {
       displayMessage("You lost!");
       displayScore(0);
-      body.classList.add("lose-background");
-      check.classList.add("hidden");
-      again.classList.remove("hidden");
     }
   }
 });

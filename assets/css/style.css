@@ -126,6 +126,10 @@ h1 {
 .win-background {
   background-color: #3f792d96;
 }
+.lose-background {
+  background-color: #69101096;
+}
+
 @media only screen and (min-height: 951px) {
   .btn {
     position: absolute;
